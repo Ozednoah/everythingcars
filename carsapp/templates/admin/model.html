@@ -1,0 +1,37 @@
+{%extends 'admin/layout.html'%}
+{%block content%}
+{% set m=get_flashed_messages() %}
+{% if m%}
+{% for i in m%}
+<div class="alert alert-info">{{i}}</div>
+{%endfor%}
+{%endif%}
+<a href="/admin/models/add" class="btn btn-info">Add Models</a>
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">S/N</th>
+        <th scope="col">Manufacturer</th>
+        <th scope="col">Models</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for m in model %}  
+      <tr>
+        <td>{{loop.index}}</td>
+        <td>{{m.modelmanu.manufacturer_name }}</td>
+        <td>{{m.carmodel_name}}</td>
+        
+        
+       
+        <td><a href="/admin/models/edit/{{m.carmodel_id}}" class="btn btn-success">Edit</a></td>
+        <td><a href="/admin/models/delete/{{m.carmodel_id}}" class="btn btn-danger">Delete</a></td>
+        
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock %}

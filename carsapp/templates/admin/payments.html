@@ -1,0 +1,36 @@
+{%extends 'admin/layout.html'%}
+{%block content%}
+{% set m=get_flashed_messages() %}
+{% if m%}
+{% for i in m%}
+<div class="alert alert-info">{{i}}</div>
+{%endfor%}
+{%endif%}
+<div class="table-responsive">
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">S/N</th>
+        <th scope="col">Payment Ref</th>
+        <th scope="col">User Name</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Status</th>
+        <th scope="col">Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for p in payment %}  
+      <tr>
+        <td>{{loop.index}}</td>
+        <td>{{p.pay_ref}}</td>
+        <td>{{p.pay_user.user_fullname}}</td>
+        <td>{{p.pay_amt}}</td>
+        <td>{{p.pay_status}}</td>
+        <td>{{p.pay_date}}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}

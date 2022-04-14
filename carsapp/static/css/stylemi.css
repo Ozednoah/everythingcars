@@ -1,0 +1,221 @@
+			*{
+				box-sizing: border-box;
+				border: 0px solid #61825c;
+			}
+			.social-links li{
+				display: inline-block;
+				padding-right: 10px;
+			}
+			.social{
+				padding-top: 25px;
+			}
+			.foot{
+				list-style: none;
+			}
+			.foot a{
+				text-decoration: none;
+				color: black;
+			}
+			.sublink{
+				text-decoration: none;
+				color: black;
+			}
+			.sublink:hover{
+				color: black;
+			}
+			.footcolor{
+				background-color: #e8e5da;
+				padding: 10px;
+			}
+			tr:hover{
+				background-color: #dff4dc;
+			}
+			tr:first-child:hover{
+				color: white;
+			}
+			h6{
+				padding-top: 7px;
+			}
+			h6 a{
+				text-decoration: none;
+				color: black;
+			}
+			h6 a:hover{
+				color: #61825c;
+			}
+			.comment{
+				resize: none;
+				height: 200px;
+			}
+			#loginhere{
+				padding-top: 15px;
+			}
+			#navlist li a{
+				font-size: 20px;
+				padding-left: 10px;
+				font-weight: bold;
+			}
+			#navlist li a:hover{
+				background-color: #61825c;
+			}
+			td a{
+				color: black;
+				text-decoration: none;
+				font-size: 20px;
+			}
+			td{
+				font-size: 20px;
+			}
+			td a:hover{
+				color: #61825c;
+			}
+			#mynav{
+				margin: 0;
+				padding: 0;
+				float: left;
+				width: 100%;
+			}
+			#mynav li{
+				display: inline;
+				padding: 0;
+				margin: 0;
+			}
+			#mynav a:link,
+			#mynav a:visited{
+				color: black;
+				padding: 10px 10px 4px 10px;
+				float: left;
+				width: auto;
+				text-decoration: none;
+			}
+			#mynav a:hover,
+			#mynav a:focus{
+				color: black;	
+			}
+			#mynav a:active{
+				color: #000;
+			}
+			body{margin-top:20px;
+				background-color:#f2f6fc;
+				color:#69707a;
+				}
+				.img-account-profile {
+					height: 10rem;
+				}
+				.rounded-circle {
+					border-radius: 50% !important;
+				}
+				.card {
+					box-shadow: 0 0.15rem 1.75rem 0 rgb(33 40 50 / 15%);
+				}
+				.card .card-header {
+					font-weight: 500;
+				}
+				.card-header:first-child {
+					border-radius: 0.35rem 0.35rem 0 0;
+				}
+				.card-header {
+					padding: 1rem 1.35rem;
+					margin-bottom: 0;
+					background-color: rgba(33, 40, 50, 0.03);
+					border-bottom: 1px solid rgba(33, 40, 50, 0.125);
+				}
+				.form-control, .dataTable-input {
+					display: block;
+					width: 100%;
+					padding: 0.875rem 1.125rem;
+					font-size: 0.875rem;
+					font-weight: 400;
+					line-height: 1;
+					color: #69707a;
+					background-color: #fff;
+					background-clip: padding-box;
+					border: 1px solid #c5ccd6;
+					-webkit-appearance: none;
+					-moz-appearance: none;
+					appearance: none;
+					border-radius: 0.35rem;
+					transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+				}
+				
+				.nav-borders .nav-link.active {
+					color: #0061f2;
+					border-bottom-color: #0061f2;
+				}
+				.nav-borders .nav-link {
+					color: #69707a;
+					border-bottom-width: 0.125rem;
+					border-bottom-style: solid;
+					border-bottom-color: transparent;
+					padding-top: 0.5rem;
+					padding-bottom: 0.5rem;
+					padding-left: 0;
+					padding-right: 0;
+					margin-left: 1rem;
+					margin-right: 1rem;
+				}
+				
+				.btn-danger-soft {
+					color: #000;
+					background-color: #f1e0e3;
+					border-color: #f1e0e3;
+				}
+				body{margin-top:20px;
+background-color:#f2f6fc;
+color:#69707a;
+}
+.img-account-profile {
+    height: 10rem;
+}
+.rounded-circle {
+    border-radius: 50% !important;
+}
+.card {
+    box-shadow: 0 0.15rem 1.75rem 0 rgb(33 40 50 / 15%);
+}
+.card .card-header {
+    font-weight: 500;
+}
+.card-header:first-child {
+    border-radius: 0.35rem 0.35rem 0 0;
+}
+.card-header {
+    padding: 1rem 1.35rem;
+    margin-bottom: 0;
+    background-color: rgba(33, 40, 50, 0.03);
+    border-bottom: 1px solid rgba(33, 40, 50, 0.125);
+}
+.form-control, .dataTable-input {
+    display: block;
+    width: 100%;
+    padding: 0.875rem 1.125rem;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1;
+    color: #69707a;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #c5ccd6;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 0.35rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.nav-borders .nav-link.active {
+    color: #0061f2;
+    border-bottom-color: #0061f2;
+}
+.nav-borders .nav-link {
+    color: #69707a;
+    border-bottom-width: 0.125rem;
+    border-bottom-style: solid;
+    border-bottom-color: transparent;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}

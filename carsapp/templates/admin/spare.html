@@ -1,0 +1,39 @@
+{%extends 'admin/layout.html'%}
+{%block content%}
+{% set m=get_flashed_messages() %}
+{% if m%}
+{% for i in m%}
+<div class="alert alert-info">{{i}}</div>
+{%endfor%}
+{%endif%}
+<a href="/admin/spareparts/add" class="btn btn-info">Add Spareparts</a>
+<div class="table-responsive">
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">S/N</th>
+        <th scope="col">Image</th>
+        <th scope="col">Name</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Manufacturer</th>
+        <th scope="col">Supplier Location</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for m in spare %}  
+      <tr>
+        <td>{{loop.index}}</td>
+        <td><img src="/static/assets/img/{{m.spareparts_image}}" alt="f" width="50" height="50"></td>
+        <td>{{m.spareparts_name}}</td>
+        <td>{{m.spareparts_amount}}</td>
+        <td>{{m.sparemanu.manufacturer_name}}</td>
+        <td>{{m.sparesupp.suppliers_location}}</td>
+        <td><a href="" class="btn btn-danger">Delete</a></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}

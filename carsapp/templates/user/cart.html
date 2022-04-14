@@ -1,0 +1,85 @@
+{% extends 'user/layout.html' %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <form action="/user/buy" method="post">
+            {% set m=get_flashed_messages() %}
+					{% if m%}
+					{% for i in m%}
+					<div class="alert alert-info">{{i}}</div>
+					{%endfor%}
+					{%endif%}
+        <div class="table-responsive">
+        <table class="table table-md">
+            <thead>
+                <th>S/N</th>
+                <th>Name</th>
+                <th>Image</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Subtotal</th>
+                
+                <th>Delete</th>
+            </thead>
+            <tbody>
+                {% for x,y in session['shoppingcart'].items() %}
+                <tr>
+                    <td>{{loop.index}}</td>
+                    <td>{{y.name}}</td>
+                    <td><img src="/static/assets/img/{{y.image}}" alt="" width="50" height="50"></td>
+                    <td>{{y.price}}</td>
+                    <td>{{y.quantity}}</td>
+                    {% set subtotal = y.quantity|int * y.price|float %}
+                    <td>{{subtotal}}</td>
+                    
+                    <td><a href="/remove/cart/{{x}}">Delete</a></td>
+                </tr>
+                {%endfor%}
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    {% if vat == 0: %}
+                    <td><h4>No Items Added</h4></td>
+                    {%else%}
+                    <td><h5>VAT: #{{vat}}</h5></td>
+                    {%endif%}
+
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    
+                    <td><h5>GrandTotal: #{{grandtotal}}</h5></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+        <div class="row">
+            <div class="col">
+                <label>Enter Your Address</label>
+                <input type="text" name="address" placeholder="enter your Address" class="form-control">
+                <input type="hidden" name="grandtotal" value="{{grandtotal}}">
+                <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+    
+            </div>
+        </div>
+        <div class="row pb-5">
+            <div class="col-2">
+                <td><a href="/spareparts" class="btn btn-primary" type="button">Continue Shopping</a></td>
+            </div>
+            <div class="col-2 offset-8">
+                <button class="btn btn-success" type="submit">Checkout</button>
+            </div>
+        </div>
+    </div>
+    
+</form> 
+</div>								
+{% endblock %}
+

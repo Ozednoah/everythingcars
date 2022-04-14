@@ -1,0 +1,26 @@
+{%extends 'admin/layout.html'%}
+{%block content%}
+{% set m=get_flashed_messages() %}
+{% if m%}
+{% for i in m%}
+<div class="alert alert-info">{{i}}</div>
+{%endfor%}
+{%endif%}
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">S/N</th>
+        <th scope="col">Manufacturer</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for m in manu %}  
+      <tr>
+        <td>{{loop.index}}</td>
+        <td>{{m.manufacturer_name }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+{% endblock %}

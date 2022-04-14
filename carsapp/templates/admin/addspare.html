@@ -1,0 +1,42 @@
+{%extends 'admin/layout.html'%}
+{%block content%}
+<h1>Add Sparepart</h1>
+<form action="" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+    <div class="pb-2">
+        <input type="file" name="img" class="form-control" placeholder="Upload sparepart image ">
+    </div>
+    <div class="pb-2">
+        <input type="text" name="year" class="form-control" placeholder="Part Name">
+    </div>
+    <div class="pb-2">
+        <input type="text" name="amount" class="form-control" placeholder="Part amount">
+    </div>
+<div class="pb-2">
+    <select name="manu" class="form-control">
+        <option value="">Select Manufacturer</option>
+        {% for i in manu %}
+        <option value="{{i.manufacturer_id}}">{{i.manufacturer_name}}</option>
+        {%endfor%}
+    </select>
+</div>
+<div class="pb-2">
+    <select name="model" class="form-control">
+        <option value="">Select Model</option>
+        {% for c in model %}
+        <option value="{{c.carmodel_id}}">{{c.carmodel_name}}</option>
+        {% endfor%}
+    </select>
+</div>
+<div class="pb-2">
+    <select name="supplier" class="form-control">
+        <option value="">Select Supplier</option>
+        {% for s in supp %}
+        <option value="{{s.suppliers_id}}">{{s.suppliers_name}}</option>
+        {%endfor%}
+    </select>
+</div>
+<button class="btn btn-success">Submit</button>
+</form>
+
+{% endblock%}

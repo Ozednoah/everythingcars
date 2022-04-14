@@ -1,0 +1,80 @@
+{% extends 'user/layout.html'%}
+{% block content%}
+<form action="/user/create/post" method="post">
+			<div class="row pb-3">
+			<h3>Create New Post</h3>
+			{% set m=get_flashed_messages() %}
+			{% if m%}
+			{% for i in m%}
+			<div class="alert alert-info">{{i}}</div>
+			{%endfor%}
+			{%endif%}
+				<div class="col-md-12">
+					<label>Thread Title</label>
+					<input type="text" name="title" class="form-control" id="title">
+				</div>
+			</div>
+			<div class="row pb-3">
+				<div class="col-md-6">
+					<label>Select Category</label>
+					<select name="manu" class="form-control" id="manu">
+						<option value=''>Select</option>
+						{% for i in manu %}
+						<option value='{{i.manufacturer_id}}'>{{i.manufacturer_name}}</option>
+						{% endfor %}
+					</select>
+				</div>
+			</div>
+			<div class="row pb-3">
+				<div class="col-md-12">
+					<label>Description</label>
+					<input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+					<textarea class="form-control comment" id="desc" name="desc"></textarea>
+				</div>
+			</div>
+			<div class="row pb-5">
+				<div class="col-md-6">
+					<button class="btn btn-danger btn-sm" type="button">Cancel</button>
+				</div>
+				<div class="col-md-6">
+					<button class="btn btn-info btn-sm" id="submitbtn">Create Thread</button>
+				</div>
+			</div>
+		</form>
+		<div class="row">
+			<div class="col text-center">
+				<p class="h3">My Posts</p>
+			</div>
+		</div>
+		{% if post %}
+			{% for i,k in zip(post,c) %}
+			<div class="row mb-2" style="border: 1px solid #61825c;border-radius: 15px;">
+				<a href="/open/post/{{i.posts_id}}" style="color: black;text-decoration: none;"><div class="row">
+					<div class="col-md-5">
+						<p>{{i.posts_title}}</p>
+					</div>
+					<div class="col-md-2 align-items-center">
+						<p>{{i.postmanu.manufacturer_name}}</p>
+					</div>
+					<div class="col-md-3 align-items-center">
+						<p>Posted by {{i.postuser.user_fullname}}</p>
+					</div>
+					<div class="col-md-2 align-items-center">
+						<p class="align-items-center">No of Replies {{k}}</p>
+					</div>
+				</div>
+			</a>
+			</div>
+			{%endfor%}
+			{%else%}
+			<div class="row">
+				<div class="col">
+					<p>No Post Yet</p>
+				</div>
+			</div>
+			{% endif %}
+			<script src="{{ url_for('static',filename='js/jquery.js')}}"></script>
+			<script>
+			
+			</script>
+	{% endblock %}

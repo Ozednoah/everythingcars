@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	<title>Admin</title>
+	<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link rel="stylesheet" href="{{ url_for('static',filename='backend/assets/css/bootstrap.min.css') }}">
+		<style type="text/css">
+			*{
+				border: 0px solid black;
+			}
+			.sidebar-wrapper {
+			    position: fixed;
+			    top: 0;
+			    left: 0;
+			    width: 260px;
+			    height: 100%;
+			    background-color: #ffffff;
+			}
+			.sidebar{
+				width: 260px;
+			    height: 100px;
+			    display: flex;
+			    align-items: center;
+			    position: fixed;
+			    top: 0;
+			    bottom: 0;
+			    padding: 0 15px;
+			}
+			.toggle-icon{
+				font-size: 30px;
+			    cursor: pointer;
+			    color: #212529;
+			    padding-left: 10px;
+			}
+			.sidebar-wrapper .menu{
+				padding: 10px;
+				margin-top: 100px;
+				display: flex;
+				flex-direction: column;
+			}
+		</style>
+</head>
+	<body>
+	<div class="container-fluid">
+		<aside class="sidebar-wrapper">
+			<div class="sidebar">
+				<div>
+					<img src="images/logo.png" alt="no logo" class="img-fluid">
+				</div>
+				<div class="toggle-icon">
+					<i class="fa fa-bars"></i>
+				</div>
+			</div>
+			<ul class="menu">
+				<li>
+					<a href="manufacturers.html"></i>Manufacturers</a><i class="fa-solid fa-cars">
+				</li>
+			</ul>
+		</aside>
+	</div>
+	<script language="javascript"></script>
+	</body>
+</html>

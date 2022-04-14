@@ -1,0 +1,48 @@
+{%extends 'user/layout.html'%}
+{%block content%}
+			<div class="row">
+				<div class="col-md-6">
+					<img src="{{url_for('static',filename='/assets/img/specreg.jpg')}}" alt="noimage" class="img-fluid">
+				</div>
+				<div class="col-md-6">
+					<h1>Register Here</h1>
+					<p>Login <a href="{{url_for('spec_login')}}">Here</a></p>
+					<p><i>Your expertise is always needed</i></p>
+					{% set m=get_flashed_messages() %}
+					{% if m%}
+					{% for i in m%}
+					<div class="alert alert-info">{{i}}</div>
+					{%endfor%}
+					{%endif%}
+					<form action="{{url_for('spec_details')}}" method="post">
+						<div class="pt-3 pb-3">
+							{{ spec.fullname(class_='form-control form-control-lg',placeholder='Enter your Fullname')}}
+							{% if spec.fullname.errors %}
+      								<span>{{ spec.fullname.errors }}</span>
+									  {%endif%}
+						</div>
+						<div class="pb-3">
+							{{ spec.email(class_='form-control form-control-lg',placeholder='Enter your Email address')}}
+							{% if spec.email.errors %}
+      								<span>{{ spec.email.errors }}</span>
+									  {%endif%}
+						</div>
+						<div class="pb-3">
+							{{ spec.password(class_='form-control form-control-lg',placeholder='Enter Password')}}
+							{% if spec.password.errors %}
+      								<span>{{ spec.password.errors }}</span>
+									  {%endif%}
+						</div>
+						<div class="pb-3">
+							{{ spec.password1(class_='form-control form-control-lg',placeholder='Confirm Password')}}
+							{% if spec.password1.errors %}
+      								<span>{{ spec.password1.errors }}</span>
+									  {%endif%}
+						</div>
+						{{ spec.submitbtn(class_='btn btn-outline-success')}}
+									  {{ spec.csrf_token }}
+					</form>
+				</div>
+			</div>
+			</div>
+{%endblock%}

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	<title>everythingCars</title>
+	<meta charset="utf-8">
+	<meta name="description" content="everythingcars is a forum where car owners dicuss about their cars and equally order and get spareparts delivered to their doorstep">
+	<meta name="keywords" content="toyota,acura,honda,spareparts,nissan,bmw,mercedes-benz,mazda,everythingcars,porsche">
+	<meta name="author" content="maduabuchi noah">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link href="{{ url_for('static',filename='css/styles.css') }}" rel="stylesheet">
+		<link href="{{url_for('static',filename='css/stylemi.css')}}" rel="stylesheet" type="text/css">
+		<style type="text/css">
+			
+		</style>
+</head>
+	<body>
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<nav class="navbar navbar-expand-lg navbar-light bg-light">
+					  <div class="container-fluid">
+					    <a href="{{url_for('home')}}"><img src="{{url_for('static',filename='/assets/img/logo.png')}}" alt="no logo" class="img-fluid"></a>
+					    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					      <span class="navbar-toggler-icon"></span>
+					    </button>
+					    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+					      <ul class="navbar-nav me-auto mb-2 mb-lg-0" id="navlist">
+					        <li class="nav-item">
+					          <a class="nav-link" href="{{url_for('home')}}">Home</a>
+					        </li>
+					        <li class="nav-item">
+					          <a class="nav-link" href="spareparts.html">Spareparts</a>
+					        </li>
+					         <li class="nav-item">
+					          <a class="nav-link" href="{{url_for('register')}}">Register</a>
+					        </li>
+							{% if session.get('speclog') != None: %}
+							<li class="nav-item">
+								<a class="nav-link" href="{{url_for('spec_profile')}}">Profile ({{name}})</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="{{url_for('spec_logout')}}">Logout</a>
+							</li>
+					      </ul>
+						  {%endif%}
+					    </div>
+					  </div>
+					</nav>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-8 pb-4">
+					<form class="d-flex" action="/search" method="post">
+			        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+			        <button class="btn btn-outline-success" type="submit">Search</button>
+			      </form>
+				</div>
+				<div class="col-4">
+					<h6>Specialist? <a href="{{url_for('spec_reg')}}">Register here</a> <a href="{{url_for('spec_login')}}">Login here</a></h6>
+				</div>
+			</div>
+			{% set m=get_flashed_messages() %}
+			{% if m%}
+			{% for i in m%}
+			<div class="alert alert-info">{{i}}</div>
+			{%endfor%}
+			{%endif%}
+				<div class="row">
+					<div class="col text-center">
+						<p class="h3">Posts Commented By Me</p>
+					</div>
+				</div>
+				{% if post %}
+			{% for i,k in zip(post,c) %}
+            {% if i!=None %}
+			<div class="row mb-2" style="border: 1px solid black;border-radius: 15px;">
+				<a href="/open/post/{{i.posts_id}}" style="color: black;text-decoration: none;"><div class="row">
+					<div class="col-md-5">
+						<p>{{i.posts_title}}</p>
+					</div>
+					<div class="col-md-2 align-items-center">
+						<p>{{i.postmanu.manufacturer_name}}</p>
+					</div>
+					<div class="col-md-3 align-items-center">
+						<p>Posted by {{i.postuser.user_fullname}}</p>
+					</div>
+					<div class="col-md-2 align-items-center">
+						<p class="align-items-center">No of Replies {{k}}</p>
+					</div>
+				</div>
+			</a>
+			</div>
+            {%endif%}
+            
+			{%endfor%}
+            
+			{%else%}
+			<div class="row">
+				<div class="col">
+					<p>No Post Yet</p>
+				</div>
+			</div>
+			{% endif %}
+
+			<footer>
+				<div class="row">
+					<div class="col-md-4 footcolor">
+					<a href="{{url_for('home')}}"><img src="{{url_for('static',filename='/assets/img/flogo.png')}}" alt="no logo" class="img-fluid"></a>
+					<p>we provide car solutions your cars and spareparts location</p>
+				</div>
+				<div class="col-md-4 footcolor">
+					<div>
+					<form class="d-flex">
+			        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+			        <button class="btn btn-outline-success" type="submit">Search</button>
+			      </form>
+				</div>
+				<h3><a href="#" class="sublink">Subscribe to news letter for updates</a></h3>
+				<p>we will never share your email to 3rd party</p>
+				<ul class="social-links">
+					<li><a href="#"><img src="{{url_for('static',filename='/assets/img/instagram.png')}}" width="20" height="20"></a></li>
+					<li><a href="#"><img src="{{url_for('static',filename='/assets/img/twitter.png')}}" width="20" height="20"></a></li>
+					<li><a href="#"><img src="{{url_for('static',filename='/assets/img/youtube.png')}}" width="20" height="20"></a></li>
+					<li><a href="#"><img src="{{url_for('static',filename='/assets/img/whatsapp.png')}}" width="20" height="20"></a></li>
+					<li><a href="#"><img src="{{url_for('static',filename='/assets/img/facebook.png')}}" width="20" height="20"></a></li>
+            </ul>
+				</div>
+				<div class="col-md-4 footcolor">
+					<h3>Information</h3>
+					<ul class="foot">
+						<a href="" title=""><li>About Us</li></a>
+						<a href="" title=""><li>Contact Us</li></a>
+					</ul>
+				</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12 footcolor">
+						&copy copyright 2022 Maduabuchi Noah
+					</div>
+				</div>
+			</footer>
+		</div>
+	<script src = 'jquery.js' language="javascript" type = 'text/javascript'></script>
+	<script language="javascript" src ="js/bootstrap.min.js" type="text/javascript"></script>
+	<script type="text/javascript">
+	</script>
+	</body>
+</html>

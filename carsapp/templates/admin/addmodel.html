@@ -1,0 +1,16 @@
+{%extends 'admin/layout.html'%}
+{%block content%}
+<h1>Edit Model</h1>
+<form action="" method="post">
+    <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+<select name="manu" class="form-control">
+    <option value="">select</option>
+    {% for i in manu%}
+    <option value="{{i.manufacturer_id}}">{{i.manufacturer_name}}</option>
+    {% endfor %}
+</select>
+<input type="text" name="add" class="form-control">
+<button class="btn btn-success">Submit</button>
+</form>
+
+{% endblock%}

@@ -1,0 +1,41 @@
+{%extends 'admin/layout.html'%}
+{%block content%}
+{% set m=get_flashed_messages() %}
+{% if m%}
+{% for i in m%}
+<div class="alert alert-info">{{i}}</div>
+{%endfor%}
+{%endif%}
+<a href="/admin/suppliers/add" class="btn btn-info">Add Suppliers</a>
+<div class="table-responsive">
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">S/N</th>
+        <th scope="col">Name</th>
+        <th scope="col">Location</th>
+        <th scope="col">Phone</th>
+        <th scope="col">Email</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+        {% if supp: %}
+        {% for i in supp %}
+      <tr>
+        <td>{{loop.index}}</td>
+        <td>{{i.suppliers_name}}</td>
+        <td>{{i.suppliers_location}}</td>
+        <td>{{i.suppliers_phone}}</td>
+        <td>{{i.suppliers_email}}</td>
+        <td><a href="" class="btn btn-success">Edit</a></td>
+        <td><a href="" class="btn btn-danger">Delete</a></td>
+        
+      </tr>
+      {%endfor%}
+      {%endif%}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

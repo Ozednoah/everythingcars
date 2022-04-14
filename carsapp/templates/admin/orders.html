@@ -1,0 +1,42 @@
+{%extends 'admin/layout.html'%}
+{%block content%}
+{% set m=get_flashed_messages() %}
+{% if m%}
+{% for i in m%}
+<div class="alert alert-info">{{i}}</div>
+{%endfor%}
+{%endif%}
+<div class="table-responsive">
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">S/N</th>
+        <th scope="col">Date</th>
+        <th scope="col">Address</th>
+        <th scope="col">Order-Status</th>
+        <th scope="col">Show Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for order in orders %}  
+      <tr>
+        <td>{{loop.index}}</td>
+        <td>{{order.order_date}}</td>
+        <td>{{order.order_address}}</td>
+        <td>
+          <form action="/order/edit/{{order.order_id}}" method="post">
+            <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+            <select name="status" class="form-control">
+              <option value="{{order.order_status}}">{{order.order_status}}</option>
+              <option value="delivered">Delivered</option>
+            </select>
+            <button class="btn btn-sm btn-primary">Enter</button>
+          </form>
+        </td>
+        <td><a href="/order/details/{{order.order_id}}" class="btn btn-success">Show Details</a></td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

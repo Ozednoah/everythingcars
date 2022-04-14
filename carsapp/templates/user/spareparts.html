@@ -1,0 +1,44 @@
+{% extends 'user/layout.html' %}
+{% block content %}
+				<h1>Spare<span style="color: #61825c;">parts</span></h1>
+				{% set m=get_flashed_messages() %}
+			{% if m%}
+			{% for i in m%}
+			<div class="alert alert-info">{{i}}</div>
+			{%endfor%}
+			{%endif%}
+			<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+			<div class="container">
+			<div class="row">
+				{% for i in spare%}
+				<div class="col-md-3">
+					<div class="ibox">
+						<div class="ibox-content product-box">
+							<div class="product-imitation">
+								<img src="/static/assets/img/{{i.spareparts_image}}" width="200px" height="200px">
+							</div>
+							<div class="product-desc">
+								<span class="product-price">
+									#{{i.spareparts_amount}}
+								</span>
+								<p class="product-name">{{i.spareparts_name}}</p>
+								<div class="m-t text-righ row">
+									<div class="col">
+										<a href="/spareparts/details/{{i.spareparts_id}}" class="btn btn-xs btn-outline btn-primary">Info <i class="fa fa-long-arrow-right"></i> </a>
+									</div>
+									<div class="col">
+										<form action="{{url_for('addcart')}}" method="post">
+											<input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+											<input type="hidden" name="spareparts_id" value="{{i.spareparts_id}}">
+											<button type="submit" class="btn btn-sm btn-secondary">Add Cart</button>
+											<input type="hidden" name="quantity" value="1" min="1" max="20">
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				{%endfor%}
+				</div>
+{% endblock %}

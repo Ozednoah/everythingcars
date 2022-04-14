@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>admin-login</title>
+	<link rel="stylesheet" href="">
+	<link rel="stylesheet" href="{{ url_for('static',filename='backend/assets/css/bootstrap.min.css') }}">
+	<style type="text/css">
+	
+		</style>
+</head>
+<body>
+	<div class="container">
+		<div class="row pb-2">
+			<div class="col-6 offset-3">
+				<img src="{{url_for('static',filename='/assets/img/admin.jpg')}}" class="img-fluid">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-6 offset-3">
+				<form action="/admin/dashboard" method="post">
+					<div class="pb-2">
+						<input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+						<input type="text" name="adminname" placeholder="admin name" class="form-control">
+					</div>
+					<div class="pb-2">
+						<input type="password" name="adminpwd" placeholder="admin-password" class="form-control">
+					</div>
+					<div>
+						<button class="btn btn-success">Enter</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

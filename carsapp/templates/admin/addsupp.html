@@ -1,0 +1,22 @@
+{%extends 'admin/layout.html'%}
+{%block content%}
+<h1>Add Suppliers</h1>
+<form action="" method="post">
+    <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+    <div class="pb-2">
+        <input type="text" name="name" class="form-control" placeholder="Supplier name">
+    </div>
+    <div class="pb-2">
+        <input type="text" name="location" class="form-control" placeholder="Supplier Location">
+    </div>
+    <div class="pb-2">
+        <input type="text" name="phone" class="form-control" placeholder="Supplier Phone">
+    </div>
+    <div class="pb-2">
+        <input type="email" name="email" class="form-control" placeholder="Supplier Email">
+    </div>
+
+<button class="btn btn-success">Submit</button>
+</form>
+
+{% endblock%}

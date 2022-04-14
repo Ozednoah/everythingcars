@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	<title>everythingCars</title>
+	<meta charset="utf-8">
+	<meta name="description" content="everythingcars is a forum where car owners dicuss about their cars and order and get spareparts delivered to their doorstep">
+	<meta name="keywords" content="toyota,acura,honda,spareparts,nissan,bmw,mercedes-benz,mazda,everythingcars,porsche">
+	<meta name="author" content="maduabuchi noah">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link href="{{ url_for('static',filename='css/styles.css') }}" rel="stylesheet">
+		<link href="{{url_for('static',filename='css/stylemi.css')}}" rel="stylesheet" type="text/css">
+		<style type="text/css">
+			
+		</style>
+</head>
+	<body>
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<nav class="navbar navbar-expand-lg navbar-light bg-light">
+					  <div class="container-fluid">
+					    <a href="{{url_for('home')}}"><img src="{{url_for('static',filename='/assets/img/logo.png')}}" alt="no logo" class="img-fluid"></a>
+					    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					      <span class="navbar-toggler-icon"></span>
+					    </button>
+					    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+					      <ul class="navbar-nav me-auto mb-2 mb-lg-0" id="navlist">
+					        <li class="nav-item">
+					          <a class="nav-link" href="{{url_for('home')}}">Home</a>
+					        </li>
+					        <li class="nav-item">
+					          <a class="nav-link" href="{{url_for('spareparts')}}">Spareparts</a>
+					        </li>
+					         <li class="nav-item">
+					          <a class="nav-link" href="{{url_for('register')}}">Register</a>
+					        </li>
+							{% if session.get('userlog') != None: %}
+							<li class="nav-item">
+								<a class="nav-link" href="{{url_for('user_create')}}">Create Thread</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="{{url_for('user_profile')}}">{{name.user_fullname}}</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="{{url_for('user_logout')}}">Logout</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="{{url_for('usercart')}}"><i class="fas fa-shopping-cart">Cart({{session['shoppingcart']|length}})</i></a>
+							</li>
+					      </ul>
+						  {% elif session.get('speclog') !=None: %}
+						  <li class="nav-item">
+							<a class="nav-link" href="">{{specc.specialists_fullname}}</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{{url_for('spec_logout')}}">Logout</a>
+						</li>
+						  {%else%}
+					      <li class="nav-item">
+							<a class="nav-link" data-bs-toggle="modal" data-bs-target="#exampleModal">Login</a>
+						  </li>
+						  {%endif%}
+					    </div>
+					  </div>
+					</nav>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-8 pb-4">
+				<form class="d-flex" action="/search" method="post">
+			        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
+					<input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+			        <button class="btn btn-outline-success" type="submit">Search</button>
+			      </form>
+				</div>
+				<div class="col-4">
+					<h6>Specialist? <a href="{{url_for('spec_reg')}}">Register here</a> <a href="{{url_for('spec_login')}}">Login here</a></h6>
+				</div>
+			</div>
+			<div style="border: 1px solid #61825c;border-radius: 15px;">
+			<div class="row">
+				<div class="col text-center">
+					<p class="h3">Categories</p>
+				</div>
+			</div>
+			<hr>
+			<div class="row ps-1">
+				<ul id="mynav">
+					{% for i in manu%}
+					<li>
+						<a href="/category/{{i.manufacturer_name}}/{{i.manufacturer_id}}">{{i.manufacturer_name}}</a>
+					</li>
+					{%endfor%}
+				</ul>
+			</div>
+			</div>
+			<div class="row">
+				<div class="col text-center">
+					<p class="h3">Posts</p>
+				</div>
+			</div>
+			{% set m=get_flashed_messages() %}
+			{% if m%}
+			{% for i in m%}
+			<div class="alert alert-info">{{i}}</div>
+			{%endfor%}
+			{%endif%}
+			{% if post %}
+			{% for i,k in zip(post,c) %}
+			<div class="row mb-2" style="border: 1px solid #61825c;border-radius: 15px;">
+				<a href="/open/post/{{i.posts_id}}" style="color: black;text-decoration: none;"><div class="row">
+					<div class="col-md-5">
+						<p>{{i.posts_title}}</p>
+					</div>
+					<div class="col-md-2 align-items-center">
+						<p>{{i.postmanu.manufacturer_name}}</p>
+					</div>
+					<div class="col-md-3 align-items-center">
+						<p>Posted by {{i.postuser.user_fullname}}</p>
+					</div>
+					<div class="col-md-2 align-items-center">
+						<p class="align-items-center">No of Replies {{k}}</p>
+					</div>
+				</div>
+			</a>
+			</div>
+			{%endfor%}
+			{%else%}
+			<div class="row">
+				<div class="col">
+					<p>No Post Yet</p>
+				</div>
+			</div>
+			{% endif %}
+			<footer id="fheight">
+				<div class="row">
+					<div class="col-md-4 footcolor">
+					<a href="{{url_for('home')}}"><img src="{{url_for('static',filename='/assets/img/flogo.png')}}" alt="no logo" class="img-fluid"></a>
+					<p>your favorite place to discuss cars and get solutions</p>
+				</div>
+				<div class="col-md-4 footcolor">
+					<div>
+					<form class="d-flex" action="/search" method="post">
+			        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+					<input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+			        <button class="btn btn-outline-success" type="submit">Search</button>
+			      </form>
+				</div>
+				<ul class="social-links">
+					<li><a href="#"><img src="{{url_for('static',filename='/assets/img/instagram.png')}}" width="20" height="20"></a></li>
+					<li><a href="#"><img src="{{url_for('static',filename='/assets/img/twitter.png')}}" width="20" height="20"></a></li>
+					<li><a href="#"><img src="{{url_for('static',filename='/assets/img/youtube.png')}}" width="20" height="20"></a></li>
+					<li><a href="#"><img src="{{url_for('static',filename='/assets/img/whatsapp.png')}}" width="20" height="20"></a></li>
+					<li><a href="#"><img src="{{url_for('static',filename='/assets/img/facebook.png')}}" width="20" height="20"></a></li>
+            </ul>
+				</div>
+				<div class="col-md-4 footcolor">
+					<h3>Information</h3>
+					<ul class="foot">
+						<a href="" title=""><li>About Us</li></a>
+						<a data-bs-toggle="modal" data-bs-target="#contactus">Contact Us</a>
+					</ul>
+				</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12 footcolor">
+						&copy copyright 2022 Maduabuchi Noah
+					</div>
+				</div>
+			</footer>
+		</div>
+		<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+			  <div class="modal-content text-center">
+				<div class="modal-header" style="background: color #61825c;">
+				  <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+				  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body"style="background-color:#61825c;">
+					<form action="/user/login" method="post">
+						<div class="pb-2">
+							{{ login.email(class_='form-control form-control-lg',placeholder='email address')}}
+						{% if login.email.errors %}
+								  <span>{{ login.email.errors }}</span>
+								  {%endif%}
+						</div>
+						<div class="pb-2">
+							{{ login.password(class_='form-control form-control-lg',placeholder='password')}}
+						{% if login.password.errors %}
+								  <span>{{ login.password.errors }}</span>
+								  {%endif%}
+						</div>
+						<div class="align-items-right">
+							{{ login.submitbtn(class_='btn btn-success')}}
+								  {{ login.csrf_token }}
+						</div>
+					  </form>
+				</div>
+			  </div>
+			</div>
+		  </div>
+		  <div class="modal fade" id="contactus" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+			  <div class="modal-content text-center">
+				<div class="modal-header" style="background: color #61825c;">
+				  <h5 class="modal-title" id="exampleModalLabel">Contact Us</h5>
+				  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body"style="background-color:#61825c;">
+					<form action="/user/contactus" method="post">
+						<div class="pb-2">
+							<input type="text" name="name" class="form-control" placeholder="Enter Your Name">
+							<input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+						</div>
+						<div class="pb-2">
+							<input type="email" name="email" class="form-control" placeholder="Enter Your Email Address">
+						</div>
+						<div class="align-items-right">
+							<textarea name="message" cols="60" rows="10" placeholder="Enter Your Message" class="form-control"></textarea>
+						</div>
+						<div class="pb-2">
+							<button class="btn btn-success">Submit</button>
+						</div>
+					  </form>
+				</div>
+			  </div>
+			</div>
+		  </div>
+		  <script src="{{ url_for('static',filename='js/jquery.js')}}"></script>
+	<script language="javascript" src ="{{url_for('static',filename='js/bootstrap.bundle.min.js')}}" type="text/javascript"></script>
+	<script type="text/javascript">
+	</script>
+	</body>
+</html>

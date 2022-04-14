@@ -1,0 +1,24 @@
+{%extends 'user/layout.html'%}
+{% block content%}
+			<div class="row">
+				<div class="col-md-6">
+					<img src="{{url_for('static',filename='/assets/img/specreg.jpg')}}" alt="noimage" class="img-fluid">
+				</div>
+				<div class="col-md-6">
+					<h1>Login Here</h1>
+					<p>Register <a href="{{url_for('spec_reg')}}">Here</a></p>
+					<p><i>Your expertise is always needed</i></p>
+					<form action="" method="post">
+						<div class="pb-3">
+							<input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+							<input type="email" name="email" placeholder="enter your email address" class="form-control" required>
+						</div>
+						<div class="pb-3">
+							<input type="text" name="password" placeholder="enter your password" class="form-control" required>
+						</div>
+						<button class="btn btn-success">Submit</button>
+					</form>
+				</div>
+			</div>
+			</div>
+{%endblock%}

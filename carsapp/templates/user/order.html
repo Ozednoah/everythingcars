@@ -1,0 +1,58 @@
+{% extends 'user/layout.html'%}
+{% block content %}
+<div class="container-xl px-4 mt-4">
+    <!-- Account page navigation-->
+    <nav class="nav nav-borders">
+        <a class="nav-link ms-0" href="{{url_for('user_profile')}}">Profile</a>
+        <a class="nav-link" href="{{url_for('show_user_orders')}}">Orders</a>
+        <a class="nav-link" href="{{url_for('show_user_payments')}}">Payment</a>
+    </nav>
+    
+    <hr class="mt-0 mb-4">
+   
+    <!-- Billing history card-->
+    <div class="card mb-4">
+        <div class="card-header">Order History</div>
+        <div class="card-body p-0">
+            <!-- Billing history table-->
+            <div class="table-responsive table-billing-history">
+                <table class="table mb-0">
+                    <thead>
+                        <tr>
+                            <th class="border-gray-200" scope="col">S/N</th>
+                            <th class="border-gray-200" scope="col">Date</th>
+                            <th class="border-gray-200" scope="col">Name</th>
+                            <th class="border-gray-200" scope="col">Order Status</th>
+                            <th class="border-gray-200" scope="col">Pay-Status</th>
+                            <th class="border-gray-200" scope="col">Pay-Ref</th>
+                            <th class="border-gray-200" scope="col">Total Amount</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {%if orderpay: %}
+                        {% for x,y in orderpay %}
+                        
+                        <tr>
+                            <td>{{loop.index}}</td>
+                            <td>{{x.order_date}}</td>
+                            <td>{{x.user.user_fullname}}</td>
+                            <td>{{x.order_status}}</td>
+                            <td>{{y.pay_status}}</td>
+                            <td>{{y.pay_ref}}</td>
+                            <td>{{y.pay_amt}}</td>
+                            
+                        </tr>
+                       
+                        {% endfor %}
+                        {%else%}
+                        <p>No Order Made Yet</p>
+                        {% endif %}
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}

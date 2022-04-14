@@ -1,0 +1,30 @@
+{%extends 'admin/layout.html'%}
+{%block content%}
+{% set m=get_flashed_messages() %}
+{% if m%}
+{% for i in m%}
+<div class="alert alert-info">{{i}}</div>
+{%endfor%}
+{%endif%}
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">S/N</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Product Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for order in orderdet %}  
+      <tr>
+        <td>{{loop.index}}</td>
+        <td>{{order.orderdet_quantity}}</td>
+        <td>{{order.orderdet_amt}}</td>
+        <td>{{order.orderdet_spare.spareparts_name}}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  
+{% endblock %}

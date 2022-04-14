@@ -1,0 +1,34 @@
+{% extends 'user/layout.html'%}
+{% block content %}
+			<div class="row">
+				<div class="col-6 offset-3">
+					{% set m=get_flashed_messages() %}
+					{% if m%}
+					{% for i in m%}
+					<div class="alert alert-info">{{i}}</div>
+					{%endfor%}
+					{%endif%}
+						<h2>You are about to make the following payment</h2>
+					<form action="/confirm/sparepart" method="post">
+						<div class="pb-3">
+							<input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+						</div>
+						<div>
+							<label>Name</label>
+							<p>{{deets.pay_user.user_fullname}}</p>
+						</div>
+						<div>
+							<label for="">Reference Number</label>
+							<p>{{deets.pay_ref}}</p>
+						</div>	
+						<div>
+							<label for="">Total Amount</label>
+							<p>{{deets.pay_amt}}</p>
+						</div>
+							
+						<button class="btn btn-success">Pay Now</button>
+					</form>
+				</div>
+			</div>
+			</div>
+			{% endblock %}

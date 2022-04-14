@@ -1,0 +1,23 @@
+{% extends 'user/layout.html' %}
+{% block content %}
+				<h1>Spare<span style="color: #61825c;">parts</span></h1>
+				<div class="row pb-3">
+			
+					<div class="col-5">
+							<img src="/static/assets/img/{{spare.spareparts_image}}" width="400" height="400">
+					</div>
+                    <div class="col-6 offset-1">
+                        <h1>{{spare.spareparts_name}}</h1>
+                        <h4>{{spare.spareparts_amount}}</h4>
+                        <form action="{{url_for('addcart')}}" method="post">
+                            <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+                            <input type="hidden" name="spareparts_id" value="{{spare.spareparts_id}}">
+                            <label for="">Quantity:</label>
+                            <input type="number" name="quantity" value="1" min="1" max="20" class="form-control">
+                            <button type="submit" class="btn btn-lg btn-warning">Add Cart</button>
+                        </form>
+                    </div>
+				
+				</div>
+				
+{% endblock %}

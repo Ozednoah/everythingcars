@@ -1,0 +1,129 @@
+{% extends 'user/layout.html'%}
+{% block content%}
+
+			<div class="row">
+				<div class="col-md-12 text-center">
+					<h1 style="color: #61825c;">{{posttitle}}</h1>
+					<input type="hidden" value="{{postid}}" id="postid" >
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 pt-3 pb-3" style="border: 1px solid #61825c;border-radius: 15px;overflow: auto;">
+					{{postdesc}}
+				</div>
+			</div>
+			<div class="row" id="comm">
+				<div class="col-md-12">
+					<p></p>
+				</div>
+			</div>
+			{% if session.get('speclog') !=None: %}
+			<div class="row">
+				<div class="col-md-12">
+					<textarea class="form-control comment" id="comment"></textarea>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<button class="btn btn-success" id="btnpost">Post</button>
+				</div>
+			</div>
+			<h1 class="text-center">Comments</h1>
+			{% if c: %}
+			{% for i in c %}
+			<div class="row mb-3" style="border: 1px solid #61825c;border-radius: 15px;">
+				
+				<div class="col-md-4">
+					<p>{{i.comment_fullcomment}}</p>
+				</div>
+				<div class="col-md-4">
+					{% if i.comment_specialist_id== None %}
+					<p>{{i.comuser.user_fullname}}</p>
+					{%else%}
+					<p>{{i.comspec.specialists_fullname}}(Specialist)</p>
+					{% endif %}
+				</div>
+				<div class="col-md-4">
+					<p>{{i.comment_date}}</p>
+				</div>
+
+			</div>
+			{%endfor%}
+			{%else%}
+			<div class="row">
+				<div class="col-md-6 offset-md-3">
+					<p>No Comments Yet</p>
+				</div>
+			</div>
+			{% endif %}
+			{% endif %}
+			{%if session.get('userlog') !=None: %}
+			<div class="row">
+				<div class="col-md-12">
+					<textarea class="form-control comment" id="comment"></textarea>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<button class="btn btn-success" id="btnpost">Post</button>
+				</div>
+			</div>
+			<h1 class="text-center">Comments</h1>
+			{% if c: %}
+			{% for i in c %}
+			<div class="row mb-3" style="border: 1px solid #61825c;border-radius: 15px;">
+				
+				<div class="col-md-4">
+					<p>{{i.comment_fullcomment}}</p>
+				</div>
+				<div class="col-md-4">
+					{% if i.comment_userid == None %}
+					<p>{{i.comspec.specialists_fullname}}(Specialist)</p>
+					{%else%}
+					<p>{{i.comuser.user_fullname}}</p>
+					{%endif%}
+				</div>
+				<div class="col-md-4">
+					<p>{{i.comment_date}}</p>
+				</div>
+			</div>
+			
+			{%endfor%}
+			{%else%}
+			<div class="row">
+				<div class="col-md-12">
+					<p>No Comments Yet</p>
+				</div>
+			</div>
+			{%endif%}
+			{%endif%}
+			<div class="row" id="mycomment">
+				<div class="col-md-12">
+
+				</div>
+			</div>
+			<script src="{{ url_for('static',filename='js/jquery.js')}}"></script>
+			<script>
+			$(document).ready(function(){
+				$('#btnpost').click(function(){
+					var usercomment = $('#comment').val()
+					var postid = $('#postid').val()
+					var csrf = '{{ csrf_token() }}'
+					var data = {'comment':usercomment,'csrf_token':csrf,'postid':postid}
+					$.ajax({
+						url:'/post/comment',
+						data:data,
+						type:'POST',
+						success:function(msg){
+							$("#comm").prepend("<div class='row'><div class='col-md-12'><p>" + msg + ' </p></div></div>')
+							$('#comment').val('')	
+						},
+						error:function(err){
+							console.log(err)
+						}
+					})
+				})
+			
+			})
+			</script>
+		{% endblock %}
